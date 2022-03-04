@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.aksahyaap.panditbook.R;
 
@@ -47,6 +48,8 @@ public class HomeFragment extends Fragment {
         return fragment;
     }
 
+
+    RecyclerView recyclerView_showPandits;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +57,11 @@ public class HomeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        recyclerView_showPandits = requireView().findViewById(R.id.recyclerView_showPandits);
+
+
+
     }
 
     @Override
@@ -61,5 +69,7 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
+
+
     }
 }
