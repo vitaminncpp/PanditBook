@@ -1,11 +1,14 @@
 package com.aksahyaap.panditbook.users;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.aksahyaap.panditbook.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,12 +28,11 @@ public class PanditsAdapter extends RecyclerView.Adapter<PanditsAdapter.ViewHold
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.pandit_card_layout, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
     }
 
     @Override
