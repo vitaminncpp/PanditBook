@@ -1,10 +1,10 @@
 package com.aksahyaap.panditbook.users;
 
 public class Pandit {
-    private String panditName;
-    private float panditRating;
+    private final String panditName;
+    private final int panditRating;
 
-    Pandit(String name, float rating){
+    public Pandit(String name, int rating){
         this.panditName = name;
         this.panditRating = rating;
     }

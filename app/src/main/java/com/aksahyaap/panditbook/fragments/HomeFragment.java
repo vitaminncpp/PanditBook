@@ -1,14 +1,21 @@
 package com.aksahyaap.panditbook.fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aksahyaap.panditbook.R;
+import com.aksahyaap.panditbook.users.Pandit;
+import com.aksahyaap.panditbook.users.PanditAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -50,6 +57,9 @@ public class HomeFragment extends Fragment {
 
 
     RecyclerView recyclerView_showPandits;
+    List<Pandit> panditList;
+    PanditAdapter panditAdapter;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,9 +69,25 @@ public class HomeFragment extends Fragment {
         }
 
         recyclerView_showPandits = requireView().findViewById(R.id.recyclerView_showPandits);
+        recyclerView_showPandits.setLayoutManager(new LinearLayoutManager(requireContext()));
 
+        recyclerView_showPandits.setHasFixedSize(true);
+        init();
+    }
 
+    @SuppressLint("NotifyDataSetChanged")
+    private void init(){
+        panditList = new ArrayList<>();
+        panditAdapter = new PanditAdapter(requireContext());
+        recyclerView_showPandits.setAdapter(panditAdapter);
+        panditList.add(new Pandit("Ram ji", 2));
+        panditList.add(new Pandit("Lakhan da", 5));
+        panditList.add(new Pandit("Angrezi Pandit", 2));
+        panditList.add(new Pandit("Ji Ji Maharaj", 4));
+        panditList.add(new Pandit("Pandit Hai Hum", 1));
 
+        panditAdapter.setPanditList(panditList);
+        panditAdapter.notifyDataSetChanged();
     }
 
     @Override
