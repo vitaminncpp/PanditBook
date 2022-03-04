@@ -43,7 +43,7 @@ public class PanditAdapter extends RecyclerView.Adapter<PanditAdapter.ViewHolder
         return panditList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView txtView_panditName;
         TextView txtView_panditRating;
 
@@ -57,7 +57,7 @@ public class PanditAdapter extends RecyclerView.Adapter<PanditAdapter.ViewHolder
             String panditName = pandit.getPanditName();
             float panditRating = pandit.getPanditRating();
             txtView_panditName.setText(panditName);
-            txtView_panditName.setText(String.valueOf(panditRating));
+            txtView_panditRating.setText(String.valueOf(panditRating));
         }
     }
 }
