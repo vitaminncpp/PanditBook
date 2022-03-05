@@ -1,5 +1,6 @@
 package com.aksahyaap.panditbook.users;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,14 +61,13 @@ public class PanditAdapter extends RecyclerView.Adapter<PanditAdapter.ViewHolder
             txtView_panditBio = itemView.findViewById(R.id.txtView_panditBio);
             btn_panditHire = itemView.findViewById(R.id.btn_panditHire);
 
-            btn_panditHire.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast.makeText(view.getContext(), "Btn Clicked", Toast.LENGTH_SHORT).show();
-                }
+            btn_panditHire.setOnClickListener(view -> {
+                Toast.makeText(view.getContext(), "Btn Clicked "+txtView_panditName.getText().toString(), Toast.LENGTH_SHORT).show();
+                //do something here on click
             });
         }
 
+        @SuppressLint("SetTextI18n")
         public void panditDet(Pandit pandit){
             String panditName = pandit.getPanditName();
             float panditRating = pandit.getPanditRating();
@@ -75,7 +75,7 @@ public class PanditAdapter extends RecyclerView.Adapter<PanditAdapter.ViewHolder
             String panditLoc = pandit.getPanditLoc();
 
             txtView_panditName.setText(panditName);
-            txtView_panditRating.setText(String.valueOf(panditRating));
+            txtView_panditRating.setText(panditRating + "stars");
             txtView_panditBio.setText(String.valueOf(panditBio));
             txtView_panditLocation.setText(String.valueOf(panditLoc));
         }
