@@ -4,7 +4,9 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -46,18 +48,36 @@ public class PanditAdapter extends RecyclerView.Adapter<PanditAdapter.ViewHolder
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView txtView_panditName;
         TextView txtView_panditRating;
+        TextView txtView_panditLocation;
+        TextView txtView_panditBio;
+        Button btn_panditHire;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtView_panditName = itemView.findViewById(R.id.txtView_panditName);
             txtView_panditRating = itemView.findViewById(R.id.txtView_panditRating);
+            txtView_panditLocation = itemView.findViewById(R.id.txtView_panditLocation);
+            txtView_panditBio = itemView.findViewById(R.id.txtView_panditBio);
+            btn_panditHire = itemView.findViewById(R.id.btn_panditHire);
+
+            btn_panditHire.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(view.getContext(), "Btn Clicked", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
 
         public void panditDet(Pandit pandit){
             String panditName = pandit.getPanditName();
             float panditRating = pandit.getPanditRating();
+            String panditBio = pandit.getPanditBio();
+            String panditLoc = pandit.getPanditLoc();
+
             txtView_panditName.setText(panditName);
             txtView_panditRating.setText(String.valueOf(panditRating));
+            txtView_panditBio.setText(String.valueOf(panditBio));
+            txtView_panditLocation.setText(String.valueOf(panditLoc));
         }
     }
 }
