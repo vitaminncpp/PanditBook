@@ -16,42 +16,32 @@
         android:orientation="vertical"
         android:padding="8dp">
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            >
-
-            <LinearLayout
+        <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:padding="1dp"
-
-                >
+                card_view:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:padding="5dp"
-                    android:src="@drawable/ic_person" />
+                    android:src="@drawable/ic_person"
+                    card_view:ignore="ContentDescription" />
 
                 <TextView
+                    android:id="@+id/txtView_panditName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:text="Address"
+                    android:text="@string/name"
                     android:textColor="#615e5e5e"
                     android:textSize="16sp"
                     android:textStyle="bold|normal" />
 
-
-            </LinearLayout>
-
-
-        </RelativeLayout>
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -63,14 +53,16 @@
                 android:src="@drawable/ic_home"
                 app:tint="@color/black"
                 android:padding="2dp"
-                android:layout_marginStart="10dp"/>
+                android:layout_marginStart="10dp"
+                card_view:ignore="ContentDescription" />
+
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                 >
+                android:layout_height="wrap_content">
                 <TextView
-                    android:text="PanditBook"
+                    android:id="@+id/txtView_panditLocation"
+                    android:text="@string/city_state"
                     android:textSize="17sp"
                     android:textStyle="bold"
                     android:textColor="@color/black"
@@ -78,7 +70,8 @@
                     android:layout_height="wrap_content"
                     />
                 <TextView
-                    android:text="Ahmedabd\nGujrat\n380001"
+                    android:id="@+id/txtView_panditRating"
+                    android:text="@string/rating"
                     android:textSize="13sp"
                     android:textStyle="normal"
                     android:gravity="center"
@@ -89,11 +82,33 @@
                     card_view:ignore="RtlCompat" />
 
             </LinearLayout>
-
-
-
-
         </LinearLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txtView_panditBio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="@string/bio"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/btn_panditHire"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/hire" />
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

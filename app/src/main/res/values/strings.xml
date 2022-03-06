@@ -5,4 +5,11 @@
     <string name="close">Close</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_pandit">search pandit...</string>
+    <string name="filter">Filter</string>
+    <string name="city_state">City, State</string>
+    <string name="name">Name</string>
+    <string name="rating">Rating</string>
+    <string name="bio">Bio...</string>
+    <string name="hire">Hire</string>
 </resources>
