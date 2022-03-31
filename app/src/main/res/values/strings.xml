@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">PanditBook</string>
-    <string name="server_url">192.168.91.172:8080/</string>
+    <string name="server_url">192.168.106.227:8080/</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -12,4 +12,5 @@
     <string name="rating">Rating</string>
     <string name="bio">Bio...</string>
     <string name="hire">Hire</string>
+
 </resources>

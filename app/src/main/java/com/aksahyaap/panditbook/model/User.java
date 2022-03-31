@@ -1,4 +1,4 @@
-package com.aksahyaap.panditbook.models;
+package com.aksahyaap.panditbook.model;
 
 
 import com.google.gson.annotations.SerializedName;
@@ -14,13 +14,13 @@ public class User {
     @SerializedName("bDate")
     private String bDate;
     @SerializedName("phone")
-    private long phone;
+    private String phone;
     @SerializedName("address")
     private String address;
     @SerializedName("pHash")
     private String pHash;
 
-    public User(String name, String email, int uType, String bDate, long phone, String address, String pHash) {
+    public User(String name, String email, int uType, String bDate, String phone, String address, String pHash) {
         this.name = name;
         this.email = email;
         this.uType = uType;
@@ -65,11 +65,11 @@ public class User {
         this.bDate = bDate;
     }
 
-    public long getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(long phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -87,5 +87,18 @@ public class User {
 
     public void setpHash(String pHash) {
         this.pHash = pHash;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "\"name\":\"" + name + '\"' +
+                ",\" email\":'" + email + '\"' +
+                ",\"uType\":" + uType +
+                ",\"bDate\":\"" + bDate + '\"' +
+                ",\"phone\":\"" + phone + '\"'+
+                ",\"address\":\"" + address + '\"' +
+                ",\"pHash\":\"" + pHash + '\"' +
+                '}';
     }
 }

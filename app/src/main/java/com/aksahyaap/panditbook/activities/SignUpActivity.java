@@ -15,7 +15,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.aksahyaap.panditbook.R;
-import com.aksahyaap.panditbook.models.User;
+import com.aksahyaap.panditbook.model.User;
 import com.aksahyaap.panditbook.network.APIInterface;
 import com.aksahyaap.panditbook.network.RetrofitClient;
 
@@ -37,11 +37,12 @@ public class SignUpActivity extends AppCompatActivity {
     private RadioButton rdoPdt;
     private TextView lblChoice;
     private RadioGroup rdoGrp;
-    private RadioButton radioButton=null;
+    private RadioButton radioButton = null;
     private Button btnSignUp;
 
 
     private ProgressDialog progressDialog;
+    private APIInterface apiInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,14 +50,14 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
 
-        this.progressDialog=new ProgressDialog(this)  ;
-
+        this.progressDialog = new ProgressDialog(this);
+        apiInterface = RetrofitClient.getInstance();
         this.txtName = findViewById(R.id.txtName);
-        this.txtEmail = findViewById(R.id.txtEmail);
+        this.txtEmail = findViewById(R.id.txtEmailLogin);
         this.txtBDate = findViewById(R.id.txtBDate);
         this.txtAddress = findViewById(R.id.txtAddress);
         this.txtPhone = findViewById(R.id.txtPhone);
-        this.txtPass = findViewById(R.id.txtPass);
+        this.txtPass = findViewById(R.id.txtPassLogin);
 
 
         this.rdoUsr = findViewById(R.id.rdoUsr);
@@ -71,65 +72,65 @@ public class SignUpActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
+                //#ifdef DEBUG
                 Log.i("btnSignUp", "Clicked");
+                //#endif
                 boolean isValid = validate();
                 if (isValid) {
                     sendData();
-                }else{
+                } else {
                     Toast.makeText(getApplicationContext(), "Please Fill All Required information", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-
         rdoGrp.clearCheck();
-
-
-                Log.i("textProperty", "Text Element : " + txtName);
+        Log.i("textProperty", "Text Element : " + txtName);
     }
 
 
-    private void sendData(){
+    private void sendData() {
         progressDialog.setMessage("Sending Data to Server ...");
         progressDialog.setCancelable(false);
         progressDialog.show();
-        APIInterface apiInterface = RetrofitClient.getRetrofit().create(APIInterface.class);
-        int checked=rdoGrp.getCheckedRadioButtonId();
+
+        int checked = rdoGrp.getCheckedRadioButtonId();
         int uType;
-        if(((RadioButton)findViewById(checked)).getText().toString().equals("Pandit")){
-            uType=0;
-        }else{
-            uType=1;
+        if (((RadioButton) findViewById(checked)).getText().toString().equals("Pandit")) {
+            uType = 0;
+        } else {
+            uType = 1;
         }
-        User user=new User(
+        User user = new User(
                 this.txtName.getText().toString(),
                 this.txtEmail.getText().toString(),
                 uType,
                 this.txtBDate.getText().toString(),
-                Long.parseLong(this.txtPhone.getText().toString()),
+                this.txtPhone.getText().toString(),
                 this.txtAddress.getText().toString(),
                 this.txtPass.getText().toString()
         );
 
-        Call<String> call=apiInterface.postData(user);
-        call.enqueue(new Callback<String>() {
+        Call<User> call = apiInterface.register(user);
+        call.enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<User> call, Response<User> response) {
                 progressDialog.dismiss();
-                if(response.isSuccessful()){
-                    Toast.makeText(SignUpActivity.this, response.body(),Toast.LENGTH_SHORT);
-                }else {
-                    Toast.makeText(SignUpActivity.this,response.body(),Toast.LENGTH_SHORT);
-
+                if (response.isSuccessful()) {
+                    Log.i("RegistrationResponse", response.body().toString());
+                    Toast.makeText(getApplicationContext(), response.body().toString(), Toast.LENGTH_SHORT);
+                } else {
+                    Toast.makeText(getApplicationContext(), response.body().toString(), Toast.LENGTH_SHORT);
                 }
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<User> call, Throwable t) {
                 progressDialog.dismiss();
             }
         });
     }
+
 
     private boolean validate() {
         boolean isValid = true;
@@ -184,7 +185,7 @@ public class SignUpActivity extends AppCompatActivity {
             txtBDate.setBackground(getDrawable(R.drawable.bg_text));
         }
 
-        if (this.radioButton==null) {
+        if (this.radioButton == null) {
             this.lblChoice.setBackground(getDrawable((R.drawable.bg_text_error)));
             isValid = false;
         } else {
@@ -194,11 +195,8 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public void cbuttonChecked(View v) {
-        radioButton=null;
-        int selected= rdoGrp.getCheckedRadioButtonId();
-
-            this.radioButton=findViewById(selected);
-
-
+        radioButton = null;
+        int selected = rdoGrp.getCheckedRadioButtonId();
+        this.radioButton = findViewById(selected);
     }
 }
