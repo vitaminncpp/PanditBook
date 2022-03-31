@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -33,6 +35,13 @@ public class NavigationActivity extends AppCompatActivity {
     private User user;
 
 
+    private TextView txtProfileName;
+    private TextView txtProfileEmail;
+    private TextView txtProfilePhone;
+    private TextView txtProfileAddr;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,36 +65,43 @@ public class NavigationActivity extends AppCompatActivity {
         navigation.setCheckedItem(R.id.menu_profile);
         navigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
-
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment f = null;
                 switch (item.getItemId()) {
                     case R.id.menu_home:
-                        f = new HomeFragment();
+                        f = ProfileFragment.newInstance(user);
                         Toast.makeText(getApplicationContext(), "Home is selected", Toast.LENGTH_SHORT).show();
                         navigation.setCheckedItem(R.id.menu_home);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
                         break;
                     case R.id.menu_profile:
                         f = new ProfileFragment();
                         Toast.makeText(getApplicationContext(), "Profile is selected", Toast.LENGTH_SHORT).show();
                         navigation.setCheckedItem(R.id.menu_profile);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
+
+                        Log.d("ProfileFragment",txtProfileName.getText().toString());
                         break;
                     case R.id.menu_send:
                         f = new SendRequestFragment();
                         Toast.makeText(getApplicationContext(), "Send Request is selected", Toast.LENGTH_SHORT).show();
                         navigation.setCheckedItem(R.id.menu_send);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
                         break;
                     default:
                         Toast.makeText(getApplicationContext(), "Fuck You Asshole", Toast.LENGTH_SHORT).show();
                         f = null;
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
                         break;
                 }
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
+
                 layout.closeDrawer(GravityCompat.START);
 
                 return true;
             }
         });
+
+
     }
 }
