@@ -1,7 +1,9 @@
 package com.aksahyaap.panditbook.activities;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -17,6 +19,7 @@ import com.aksahyaap.panditbook.R;
 import com.aksahyaap.panditbook.fragments.HomeFragment;
 import com.aksahyaap.panditbook.fragments.ProfileFragment;
 import com.aksahyaap.panditbook.fragments.SendRequestFragment;
+import com.aksahyaap.panditbook.model.User;
 import com.google.android.material.navigation.NavigationView;
 
 public class NavigationActivity extends AppCompatActivity {
@@ -27,11 +30,17 @@ public class NavigationActivity extends AppCompatActivity {
     private DrawerLayout layout;
 
 
+    private User user;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
 
+        Intent i = getIntent();
+        user = (User) i.getSerializableExtra("user");
+        Log.i("UserInfoPass", user.toString());
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -41,42 +50,42 @@ public class NavigationActivity extends AppCompatActivity {
         toggle = new ActionBarDrawerToggle(this, layout, toolbar, R.string.open, R.string.close);
         toggle.getDrawerArrowDrawable().setColor(Color.WHITE);
 
-         layout.addDrawerListener(toggle);
-         toggle.syncState();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new ProfileFragment()).commit();
+        layout.addDrawerListener(toggle);
+        toggle.syncState();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
         navigation.setCheckedItem(R.id.menu_profile);
-         navigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        navigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
 
-             @Override
-             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                 Fragment f = null;
-                 switch (item.getItemId()) {
-                     case R.id.menu_home:
-                         f=new HomeFragment();
-                         Toast.makeText(getApplicationContext(), "Home is selected", Toast.LENGTH_SHORT).show();
-                         navigation.setCheckedItem(R.id.menu_home);
-                         break;
-                     case R.id.menu_profile:
-                         f=new ProfileFragment();
-                         Toast.makeText(getApplicationContext(), "Profile is selected", Toast.LENGTH_SHORT).show();
-                         navigation.setCheckedItem(R.id.menu_profile);
-                         break;
-                     case R.id.menu_send:
-                         f=new SendRequestFragment();
-                         Toast.makeText(getApplicationContext(), "Send Request is selected", Toast.LENGTH_SHORT).show();
-                         navigation.setCheckedItem(R.id.menu_send);
-                         break;
-                     default:
-                         Toast.makeText(getApplicationContext(), "Fuck You Asshole", Toast.LENGTH_SHORT).show();
-                         f=null;
-                         break;
-                 }
-                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,f).commit();
-                 layout.closeDrawer(GravityCompat.START);
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Fragment f = null;
+                switch (item.getItemId()) {
+                    case R.id.menu_home:
+                        f = new HomeFragment();
+                        Toast.makeText(getApplicationContext(), "Home is selected", Toast.LENGTH_SHORT).show();
+                        navigation.setCheckedItem(R.id.menu_home);
+                        break;
+                    case R.id.menu_profile:
+                        f = new ProfileFragment();
+                        Toast.makeText(getApplicationContext(), "Profile is selected", Toast.LENGTH_SHORT).show();
+                        navigation.setCheckedItem(R.id.menu_profile);
+                        break;
+                    case R.id.menu_send:
+                        f = new SendRequestFragment();
+                        Toast.makeText(getApplicationContext(), "Send Request is selected", Toast.LENGTH_SHORT).show();
+                        navigation.setCheckedItem(R.id.menu_send);
+                        break;
+                    default:
+                        Toast.makeText(getApplicationContext(), "Fuck You Asshole", Toast.LENGTH_SHORT).show();
+                        f = null;
+                        break;
+                }
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
+                layout.closeDrawer(GravityCompat.START);
 
-                 return true;
-             }
-         });
+                return true;
+            }
+        });
     }
 }

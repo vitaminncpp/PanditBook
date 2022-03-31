@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 import com.aksahyaap.panditbook.R;
+import com.aksahyaap.panditbook.model.User;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -62,4 +63,10 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false);
     }
+
+
+    public void setUserInfo(User user){
+
+    }
+
 }

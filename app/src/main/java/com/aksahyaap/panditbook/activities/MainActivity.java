@@ -1,6 +1,7 @@
 package com.aksahyaap.panditbook.activities;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,13 +22,12 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
+    User user = null;
     private EditText txtEmail;
     private EditText txtPass;
-
     private Button btnSignup;
     private Button btnLogin;
     private Button btnForgot;
-
     private ProgressDialog dialog;
     private APIInterface apiInterface;
 
@@ -54,9 +54,14 @@ public class MainActivity extends AppCompatActivity {
                     User login = new User();
                     login.setEmail(txtEmail.getText().toString());
                     login.setpHash(txtPass.getText().toString());
-                    User user = login(login);
+                    login(login);
                     if (user != null) {
                         //TODO User Logged in successfully
+                        Intent i = new Intent(MainActivity.this, NavigationActivity.class);
+                        i.putExtra("user", user);
+                        startActivity(i);
+                    } else {
+                        //TODO Login Failure
                     }
                 } else {
                     Toast.makeText(getApplicationContext(), "Please Enter valid input", Toast.LENGTH_SHORT).show();
@@ -90,23 +95,25 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private User login(User login) {
+    private void login(User login) {
 
         dialog.setMessage("Sending Data to Server ...");
         dialog.setCancelable(false);
-       // dialog.show();
+     //   dialog.show();
 
         Call<User> call = apiInterface.login(login);
         call.enqueue(new Callback<User>() {
+
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-               // dialog.dismiss();
+                // dialog.dismiss();
                 if (response.isSuccessful()) {
                     Log.i("RegistrationResponse", response.body().toString());
-
-                    Toast.makeText(getApplicationContext(), response.body().toString(), Toast.LENGTH_SHORT);
+                    user = response.body();
+                    Toast.makeText(MainActivity.this, response.body().toString(), Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(getApplicationContext(), response.body().toString(), Toast.LENGTH_SHORT);
+
+                    Toast.makeText(getApplicationContext(), response.body().toString(), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -115,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
-        return null;
+
     }
 
 }

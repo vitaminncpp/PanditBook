@@ -70,7 +70,8 @@
                 android:layout_height="wrap_content"
                  >
                 <TextView
-                    android:text="PanditBook"
+                    android:id="@+id/txtAddTye"
+                    android:text="Home"
                     android:textSize="17sp"
                     android:textStyle="bold"
                     android:textColor="@color/black"
@@ -78,6 +79,7 @@
                     android:layout_height="wrap_content"
                     />
                 <TextView
+                    android:id="@+id/txtProfileAddr"
                     android:text="Ahmedabd\nGujrat\n380001"
                     android:textSize="13sp"
                     android:textStyle="normal"

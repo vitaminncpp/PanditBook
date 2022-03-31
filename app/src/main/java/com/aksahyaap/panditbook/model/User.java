@@ -3,8 +3,10 @@ package com.aksahyaap.panditbook.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 
-public class User {
+
+public class User implements Serializable {
     @SerializedName("name")
     private String name;
     @SerializedName("email")
