@@ -40,17 +40,15 @@ public class NavigationActivity extends AppCompatActivity {
     private TextView txtProfilePhone;
     private TextView txtProfileAddr;
 
-    String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
 
-//        Intent i = getIntent();
-//        user = (User) i.getSerializableExtra("user");
-//        Log.i("UserInfoPass", user.toString());
-        username = "SKR";
+        Intent i = getIntent();
+        user = (User) i.getSerializableExtra("user");
+        Log.i("UserInfoPass", user.toString());
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -79,7 +77,12 @@ public class NavigationActivity extends AppCompatActivity {
                         break;
                     case R.id.menu_profile:
                         Bundle bundle = new Bundle();
-                        bundle.putString("username", username);
+//                        REPLACE THIS WITH USERDATA
+                        bundle.putString("username", "USERNAME");
+                        bundle.putString("email", "EMAIL");
+                        bundle.putString("phno", "PHNO");
+                        bundle.putString("add", "ADDRESS");
+
                         f = new ProfileFragment();
                         Toast.makeText(getApplicationContext(), "Profile is selected", Toast.LENGTH_SHORT).show();
                         navigation.setCheckedItem(R.id.menu_profile);

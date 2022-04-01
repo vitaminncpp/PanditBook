@@ -71,7 +71,11 @@ public class ProfileFragment extends Fragment {
         txtProfileAddr = view.findViewById(R.id.txtProfileAddr);
 
         if(getArguments() != null){
-            Log.d("!!!",getArguments().getString("username"));
+            setUserInfo(getArguments().getString("username"),
+                    getArguments().getString("phno"),
+                    getArguments().getString("email"),
+                    getArguments().getString("add")
+            );
         }
 
 
@@ -79,15 +83,11 @@ public class ProfileFragment extends Fragment {
         return view;
     }
 
-    public void setUserInfo(User user) {
-//        txtProfileAddr.setText(user.getAddress());
-//        txtProfileName.setText(user.getName());
-//        txtProfileEmail.setText(user.getEmail());
-//        txtProfilePhone.setText(user.getPhone());
-        txtProfileAddr.setText("user.getAddress()");
-        txtProfileName.setText("user.getName()");
-        txtProfileEmail.setText("user.getEmail()");
-        txtProfilePhone.setText("user.getPhone()");
+    public void setUserInfo(String username, String phno, String email, String add) {
+        txtProfileAddr.setText(add);
+        txtProfileName.setText(username);
+        txtProfileEmail.setText(email);
+        txtProfilePhone.setText(phno);
     }
 
 }
