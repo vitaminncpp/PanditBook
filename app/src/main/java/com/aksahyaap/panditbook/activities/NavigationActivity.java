@@ -40,16 +40,17 @@ public class NavigationActivity extends AppCompatActivity {
     private TextView txtProfilePhone;
     private TextView txtProfileAddr;
 
-
+    String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
 
-        Intent i = getIntent();
-        user = (User) i.getSerializableExtra("user");
-        Log.i("UserInfoPass", user.toString());
+//        Intent i = getIntent();
+//        user = (User) i.getSerializableExtra("user");
+//        Log.i("UserInfoPass", user.toString());
+        username = "SKR";
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -77,12 +78,15 @@ public class NavigationActivity extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
                         break;
                     case R.id.menu_profile:
+                        Bundle bundle = new Bundle();
+                        bundle.putString("username", username);
                         f = new ProfileFragment();
                         Toast.makeText(getApplicationContext(), "Profile is selected", Toast.LENGTH_SHORT).show();
                         navigation.setCheckedItem(R.id.menu_profile);
+                        f.setArguments(bundle);
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
 
-                        Log.d("ProfileFragment",txtProfileName.getText().toString());
+//                        Log.d("ProfileFragment",txtProfileName.getText().toString());
                         break;
                     case R.id.menu_send:
                         f = new SendRequestFragment();
