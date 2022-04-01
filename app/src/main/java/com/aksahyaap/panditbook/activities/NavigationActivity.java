@@ -41,7 +41,6 @@ public class NavigationActivity extends AppCompatActivity {
     private TextView txtProfileAddr;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,12 +76,20 @@ public class NavigationActivity extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
                         break;
                     case R.id.menu_profile:
+                        Bundle bundle = new Bundle();
+//                        REPLACE THIS WITH USERDATA
+                        bundle.putString("username", "USERNAME");
+                        bundle.putString("email", "EMAIL");
+                        bundle.putString("phno", "PHNO");
+                        bundle.putString("add", "ADDRESS");
+
                         f = new ProfileFragment();
                         Toast.makeText(getApplicationContext(), "Profile is selected", Toast.LENGTH_SHORT).show();
                         navigation.setCheckedItem(R.id.menu_profile);
+                        f.setArguments(bundle);
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
 
-                        Log.d("ProfileFragment",txtProfileName.getText().toString());
+//                        Log.d("ProfileFragment",txtProfileName.getText().toString());
                         break;
                     case R.id.menu_send:
                         f = new SendRequestFragment();

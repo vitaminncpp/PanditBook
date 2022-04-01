@@ -1,6 +1,7 @@
 package com.aksahyaap.panditbook.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,17 +70,24 @@ public class ProfileFragment extends Fragment {
         txtProfilePhone = view.findViewById(R.id.txtProfilePhone);
         txtProfileAddr = view.findViewById(R.id.txtProfileAddr);
 
+        if(getArguments() != null){
+            setUserInfo(getArguments().getString("username"),
+                getArguments().getString("phno"),
+                getArguments().getString("email"),
+                getArguments().getString("add")
+            );
+        }
 
 
 
         return view;
     }
 
-    public void setUserInfo(User user) {
-        txtProfileAddr.setText(user.getAddress());
-        txtProfileName.setText(user.getName());
-        txtProfileEmail.setText(user.getEmail());
-        txtProfilePhone.setText(user.getPhone());
+    public void setUserInfo(String username, String phno, String email, String add) {
+        txtProfileAddr.setText(add);
+        txtProfileName.setText(username);
+        txtProfileEmail.setText(email);
+        txtProfilePhone.setText(phno);
     }
 
 }
