@@ -72,9 +72,9 @@ public class ProfileFragment extends Fragment {
 
         if(getArguments() != null){
             setUserInfo(getArguments().getString("username"),
-                    getArguments().getString("phno"),
-                    getArguments().getString("email"),
-                    getArguments().getString("add")
+                getArguments().getString("phno"),
+                getArguments().getString("email"),
+                getArguments().getString("add")
             );
         }
 
