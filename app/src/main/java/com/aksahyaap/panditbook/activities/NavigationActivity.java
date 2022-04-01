@@ -70,7 +70,8 @@ public class NavigationActivity extends AppCompatActivity {
                 Fragment f = null;
                 switch (item.getItemId()) {
                     case R.id.menu_home:
-                        f = ProfileFragment.newInstance(user);
+                        f = new ProfileFragment();
+                        ((ProfileFragment)f).setUserInfo(user);
                         Toast.makeText(getApplicationContext(), "Home is selected", Toast.LENGTH_SHORT).show();
                         navigation.setCheckedItem(R.id.menu_home);
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();

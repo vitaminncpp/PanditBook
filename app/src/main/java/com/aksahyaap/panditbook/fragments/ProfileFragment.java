@@ -22,7 +22,7 @@ public class ProfileFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
     // TODO: Rename and change types of parameters
-    private User user;
+
 
 
     private TextView txtProfileName;
@@ -42,10 +42,9 @@ public class ProfileFragment extends Fragment {
      * @return A new instance of fragment ProfileFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ProfileFragment newInstance(User user) {
+    public static ProfileFragment newInstance() {
         ProfileFragment fragment = new ProfileFragment();
         Bundle args = new Bundle();
-        fragment.setUserInfo(user);
         fragment.setArguments(args);
         return fragment;
     }
@@ -65,22 +64,22 @@ public class ProfileFragment extends Fragment {
 
         View view= inflater.inflate(R.layout.fragment_profile, container, false);
 
-        txtProfileName = container.findViewById(R.id.txtProfileName);
-        txtProfileEmail = container.findViewById(R.id.txtProfileEmail);
-        txtProfilePhone = container.findViewById(R.id.txtProfilePhone);
-        txtProfileAddr = container.findViewById(R.id.txtProfileAddr);
+        txtProfileName = view.findViewById(R.id.txtProfileName);
+        txtProfileEmail = view.findViewById(R.id.txtProfileEmail);
+        txtProfilePhone = view.findViewById(R.id.txtProfilePhone);
+        txtProfileAddr = view.findViewById(R.id.txtProfileAddr);
 
-        txtProfileAddr.setText(user.getAddress());
-        txtProfileName.setText(user.getName());
-        txtProfileEmail.setText(user.getEmail());
-        txtProfilePhone.setText(user.getPhone());
+
 
 
         return view;
     }
 
     public void setUserInfo(User user) {
-        this.user = user;
+        txtProfileAddr.setText(user.getAddress());
+        txtProfileName.setText(user.getName());
+        txtProfileEmail.setText(user.getEmail());
+        txtProfilePhone.setText(user.getPhone());
     }
 
 }
