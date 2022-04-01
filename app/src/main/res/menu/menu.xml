@@ -4,18 +4,19 @@
     >
 
 
-    <item android:id="@+id/menu_home"
+    <item
+        android:id="@+id/menu_home"
         android:icon="@drawable/ic_home"
-        
-        android:title="Home"
-        />
 
-<item android:id="@+id/menu_profile"
-    android:icon="@drawable/ic_profile"
-    android:title="Profile"
-    />
+        android:title="Home" />
 
-    <item android:id="@+id/menu_send"
+    <item
+        android:id="@+id/menu_profile"
+        android:icon="@drawable/ic_profile"
+        android:title="Profile" />
+
+    <item
+        android:id="@+id/menu_send"
         android:icon="@drawable/ic_send"
         android:title="New Request" />
 </menu>

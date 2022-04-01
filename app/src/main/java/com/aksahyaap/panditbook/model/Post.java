@@ -4,7 +4,7 @@ package com.aksahyaap.panditbook.model;
 import com.google.gson.annotations.SerializedName;
 
 public class Post {
-@SerializedName("_id")
+    @SerializedName("_id")
     private String id;
     @SerializedName("uid")
     private String uid;
@@ -25,7 +25,7 @@ public class Post {
 
         this.uid = uid;
         this.title = title;
-        this.content=content;
+        this.content = content;
         this.date = date;
 
         this.location = location;
@@ -98,7 +98,7 @@ public class Post {
     }
 
 
-    public void setId (String id) {
+    public void setId(String id) {
         this.id = id;
     }
 }

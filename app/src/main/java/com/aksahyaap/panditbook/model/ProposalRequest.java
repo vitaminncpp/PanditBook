@@ -4,11 +4,10 @@ import com.google.gson.annotations.SerializedName;
 
 
 public class ProposalRequest {
-    @SerializedName("user")
-    private User user;
-
     @SerializedName("proposal")
     Proposal proposal;
+    @SerializedName("user")
+    private User user;
 
     public ProposalRequest() {
     }

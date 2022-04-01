@@ -19,6 +19,8 @@ import com.aksahyaap.panditbook.model.User;
 import com.aksahyaap.panditbook.network.APIInterface;
 import com.aksahyaap.panditbook.network.RetrofitClient;
 
+import java.io.IOException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -77,7 +79,12 @@ public class SignUpActivity extends AppCompatActivity {
                 //#endif
                 boolean isValid = validate();
                 if (isValid) {
-                    sendData();
+                    try {
+                        sendData();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+
                 } else {
                     Toast.makeText(getApplicationContext(), "Please Fill All Required information", Toast.LENGTH_SHORT).show();
                 }
@@ -89,7 +96,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
 
-    private void sendData() {
+    private void sendData() throws IOException {
         progressDialog.setMessage("Sending Data to Server ...");
         progressDialog.setCancelable(false);
         progressDialog.show();
@@ -129,6 +136,7 @@ public class SignUpActivity extends AppCompatActivity {
                 progressDialog.dismiss();
             }
         });
+//        call.execute()
     }
 
 

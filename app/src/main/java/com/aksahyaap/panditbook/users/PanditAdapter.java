@@ -22,10 +22,11 @@ public class PanditAdapter extends RecyclerView.Adapter<PanditAdapter.ViewHolder
     List<Pandit> panditList = new ArrayList<>();
     Context context;
 
-    public PanditAdapter(Context context){
+    public PanditAdapter(Context context) {
         this.context = context;
     }
-    public void setPanditList(List<Pandit>panditList){
+
+    public void setPanditList(List<Pandit> panditList) {
         this.panditList = panditList;
     }
 
@@ -62,13 +63,13 @@ public class PanditAdapter extends RecyclerView.Adapter<PanditAdapter.ViewHolder
             btn_panditHire = itemView.findViewById(R.id.btn_panditHire);
 
             btn_panditHire.setOnClickListener(view -> {
-                Toast.makeText(view.getContext(), "Btn Clicked "+txtView_panditName.getText().toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "Btn Clicked " + txtView_panditName.getText().toString(), Toast.LENGTH_SHORT).show();
                 //do something here on click
             });
         }
 
         @SuppressLint("SetTextI18n")
-        public void panditDet(Pandit pandit){
+        public void panditDet(Pandit pandit) {
             String panditName = pandit.getPanditName();
             float panditRating = pandit.getPanditRating();
             String panditBio = pandit.getPanditBio();

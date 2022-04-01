@@ -1,7 +1,6 @@
 package com.aksahyaap.panditbook.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,12 +24,12 @@ public class ProfileFragment extends Fragment {
     // TODO: Rename and change types of parameters
 
 
-
     private TextView txtProfileName;
     private TextView txtProfileEmail;
     private TextView txtProfilePhone;
     private TextView txtProfileAddr;
 
+    private User user;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -51,8 +50,9 @@ public class ProfileFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onCreate(Bundle hPrev) {
+        super.onCreate(hPrev);
+
 
     }
 
@@ -62,32 +62,29 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
 
 
-
-        View view= inflater.inflate(R.layout.fragment_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         txtProfileName = view.findViewById(R.id.txtProfileName);
         txtProfileEmail = view.findViewById(R.id.txtProfileEmail);
         txtProfilePhone = view.findViewById(R.id.txtProfilePhone);
         txtProfileAddr = view.findViewById(R.id.txtProfileAddr);
 
-        if(getArguments() != null){
-            setUserInfo(getArguments().getString("username"),
-                getArguments().getString("phno"),
-                getArguments().getString("email"),
-                getArguments().getString("add")
-            );
-        }
+        if (getArguments() != null) {
 
+            user = new User();
+            user.setName(getArguments().getString("name"));
+            user.setEmail(getArguments().getString("email"));
+            user.setPhone(getArguments().getString("phone"));
+            user.setAddress(getArguments().getString("addr"));
+
+        }
+        txtProfileName.setText(user.getName());
+        txtProfileAddr.setText(user.getAddress());
+        txtProfileEmail.setText(user.getEmail());
+        txtProfilePhone.setText(user.getPhone());
 
 
         return view;
-    }
-
-    public void setUserInfo(String username, String phno, String email, String add) {
-        txtProfileAddr.setText(add);
-        txtProfileName.setText(username);
-        txtProfileEmail.setText(email);
-        txtProfilePhone.setText(phno);
     }
 
 }

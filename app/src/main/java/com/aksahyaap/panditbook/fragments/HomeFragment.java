@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,11 +25,12 @@ import java.util.List;
 public class HomeFragment extends Fragment {
 
 
-
-
     // TODO: Rename parameter arguments, choose names that match
 
 
+    RecyclerView recyclerView_showPandits;
+    List<Pandit> panditList;
+    PanditAdapter panditAdapter;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -50,26 +50,21 @@ public class HomeFragment extends Fragment {
         return fragment;
     }
 
-
-    RecyclerView recyclerView_showPandits;
-    List<Pandit> panditList;
-    PanditAdapter panditAdapter;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    private void init(){
+    private void init() {
         panditList = new ArrayList<>();
         panditAdapter = new PanditAdapter(requireContext());
         recyclerView_showPandits.setAdapter(panditAdapter);
-        panditList.add(new Pandit("Ram ji", 2,"I'm a good pandit", "Mumbai,Maharastra"));
-        panditList.add(new Pandit("Lakhan da", 5,"I'm a good pandit too", "Bhopal,MP"));
-        panditList.add(new Pandit("Angrezi Pandit", 2,"high rated pandit for shadi and sagai", "Ahmedabar,Gujarat"));
-        panditList.add(new Pandit("Ji Ji Maharaj", 4,"Humko bas nyochhavar se matlab hai. Jidhar jaada paisa udhar hum", "Mumbai,Maharastra"));
-        panditList.add(new Pandit("Engineer Pandit", 1,"Btech Pandit", "Delhi,Delhi"));
+        panditList.add(new Pandit("Ram ji", 2, "I'm a good pandit", "Mumbai,Maharastra"));
+        panditList.add(new Pandit("Lakhan da", 5, "I'm a good pandit too", "Bhopal,MP"));
+        panditList.add(new Pandit("Angrezi Pandit", 2, "high rated pandit for shadi and sagai", "Ahmedabar,Gujarat"));
+        panditList.add(new Pandit("Ji Ji Maharaj", 4, "Humko bas nyochhavar se matlab hai. Jidhar jaada paisa udhar hum", "Mumbai,Maharastra"));
+        panditList.add(new Pandit("Engineer Pandit", 1, "Btech Pandit", "Delhi,Delhi"));
 
         panditAdapter.setPanditList(panditList);
         panditAdapter.notifyDataSetChanged();

@@ -36,5 +36,4 @@ public interface APIInterface {
     Call<Post> getPost(@Body @NonNull PostRequest request);
 
 
-
 }

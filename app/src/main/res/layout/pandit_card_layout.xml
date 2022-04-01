@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -17,76 +16,79 @@
         android:padding="8dp">
 
         <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="1dp"
+            card_view:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:padding="5dp"
+                android:src="@drawable/ic_person"
+                card_view:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/txtView_panditName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:padding="1dp"
-                card_view:ignore="UseCompoundDrawables">
-
-                <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:padding="5dp"
-                    android:src="@drawable/ic_person"
-                    card_view:ignore="ContentDescription" />
-
-                <TextView
-                    android:id="@+id/txtView_panditName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:text="@string/name"
-                    android:textColor="#615e5e5e"
-                    android:textSize="16sp"
-                    android:textStyle="bold|normal" />
+                android:layout_margin="5dp"
+                android:text="@string/name"
+                android:textColor="#615e5e5e"
+                android:textSize="16sp"
+                android:textStyle="bold|normal" />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
+
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
+                android:layout_marginStart="10dp"
+                android:padding="2dp"
                 android:src="@drawable/ic_home"
                 app:tint="@color/black"
-                android:padding="2dp"
-                android:layout_marginStart="10dp"
                 card_view:ignore="ContentDescription" />
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/txtView_panditLocation"
-                    android:text="@string/city_state"
-                    android:textSize="17sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    />
+                    android:text="@string/city_state"
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/txtView_panditRating"
-                    android:text="@string/rating"
-                    android:textSize="13sp"
-                    android:textStyle="normal"
-                    android:gravity="center"
-                    android:textAlignment="textStart"
-                    android:textColor="#DC707070"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/rating"
+                    android:textAlignment="textStart"
+                    android:textColor="#DC707070"
+                    android:textSize="13sp"
+                    android:textStyle="normal"
                     card_view:ignore="RtlCompat" />
 
             </LinearLayout>
         </LinearLayout>
+
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/txtView_panditBio"

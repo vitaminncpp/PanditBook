@@ -51,18 +51,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (validate()) {
                     //TODO Send Login Request
+                    Log.d("LoginTrack", "Login Button Clicked");
                     User login = new User();
                     login.setEmail(txtEmail.getText().toString());
                     login.setpHash(txtPass.getText().toString());
+                    Log.d("LoginTrack", login.toString());
+
+
                     login(login);
-                    if (user != null) {
-                        //TODO User Logged in successfully
-                        Intent i = new Intent(MainActivity.this, NavigationActivity.class);
-                        i.putExtra("user", user);
-                        startActivity(i);
-                    } else {
-                        //TODO Login Failure
-                    }
+
+
                 } else {
                     Toast.makeText(getApplicationContext(), "Please Enter valid input", Toast.LENGTH_SHORT).show();
                 }
@@ -99,29 +97,32 @@ public class MainActivity extends AppCompatActivity {
 
         dialog.setMessage("Sending Data to Server ...");
         dialog.setCancelable(false);
-     //   dialog.show();
+        //dialog.show();
 
         Call<User> call = apiInterface.login(login);
         call.enqueue(new Callback<User>() {
 
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                // dialog.dismiss();
-                if (response.isSuccessful()) {
-                    Log.i("RegistrationResponse", response.body().toString());
-                    user = response.body();
-                    Toast.makeText(MainActivity.this, response.body().toString(), Toast.LENGTH_SHORT).show();
-                } else {
+                //dialog.dismiss();
 
-                    Toast.makeText(getApplicationContext(), response.body().toString(), Toast.LENGTH_SHORT).show();
-                }
+                Log.i("RegistrationResponse", response.body().toString());
+                user = response.body();
+                Log.d("LoginTrack", "Login Succeeds:" + response.body().toString());
+                Toast.makeText(MainActivity.this, response.body().toString(), Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(MainActivity.this, NavigationActivity.class);
+                i.putExtra("user", user);
+                startActivity(i);
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                dialog.dismiss();
+                //dialog.dismiss();
+                Log.d("LoginTrack", "Server is not reachable:" + t);
             }
         });
+
+        // call.execute();
 
     }
 

@@ -98,7 +98,7 @@ public class User implements Serializable {
                 ",\" email\":'" + email + '\"' +
                 ",\"uType\":" + uType +
                 ",\"bDate\":\"" + bDate + '\"' +
-                ",\"phone\":\"" + phone + '\"'+
+                ",\"phone\":\"" + phone + '\"' +
                 ",\"address\":\"" + address + '\"' +
                 ",\"pHash\":\"" + pHash + '\"' +
                 '}';

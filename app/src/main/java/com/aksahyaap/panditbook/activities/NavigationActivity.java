@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,20 +25,17 @@ import com.google.android.material.navigation.NavigationView;
 
 public class NavigationActivity extends AppCompatActivity {
 
+    Bundle bundle;
     private NavigationView navigation;
     private ActionBarDrawerToggle toggle;
     private Toolbar toolbar;
     private DrawerLayout layout;
-
-
     private User user;
-
-
+    private ProfileFragment profile;
     private TextView txtProfileName;
     private TextView txtProfileEmail;
     private TextView txtProfilePhone;
     private TextView txtProfileAddr;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +56,16 @@ public class NavigationActivity extends AppCompatActivity {
 
         layout.addDrawerListener(toggle);
         toggle.syncState();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
+
+        bundle = new Bundle();
+//                        REPLACE THIS WITH USERDATA
+        bundle.putString("name", user.getName());
+        bundle.putString("email", user.getEmail());
+        bundle.putString("phone", user.getPhone());
+        bundle.putString("addr", user.getAddress());
+        profile = new ProfileFragment();
+        profile.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, profile).commit();
         navigation.setCheckedItem(R.id.menu_profile);
         navigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
@@ -69,25 +74,17 @@ public class NavigationActivity extends AppCompatActivity {
                 Fragment f = null;
                 switch (item.getItemId()) {
                     case R.id.menu_home:
-                        f = new ProfileFragment();
-                        ((ProfileFragment)f).setUserInfo(user);
+                        f = new HomeFragment();
                         Toast.makeText(getApplicationContext(), "Home is selected", Toast.LENGTH_SHORT).show();
                         navigation.setCheckedItem(R.id.menu_home);
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
                         break;
                     case R.id.menu_profile:
-                        Bundle bundle = new Bundle();
-//                        REPLACE THIS WITH USERDATA
-                        bundle.putString("username", "USERNAME");
-                        bundle.putString("email", "EMAIL");
-                        bundle.putString("phno", "PHNO");
-                        bundle.putString("add", "ADDRESS");
 
-                        f = new ProfileFragment();
                         Toast.makeText(getApplicationContext(), "Profile is selected", Toast.LENGTH_SHORT).show();
                         navigation.setCheckedItem(R.id.menu_profile);
-                        f.setArguments(bundle);
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
+                        profile.setArguments(bundle);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, profile).commit();
 
 //                        Log.d("ProfileFragment",txtProfileName.getText().toString());
                         break;

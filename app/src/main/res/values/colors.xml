@@ -8,7 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="blob_back">#7c5dd9</color>
-    <color name="canvas_back" >#cccccc</color>
+    <color name="canvas_back">#cccccc</color>
     <color name="blob_back_light">#c57c5dd9</color>
     <color name="button_back">#22cccc</color>
 </resources>
