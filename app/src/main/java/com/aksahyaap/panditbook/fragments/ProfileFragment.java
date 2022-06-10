@@ -53,7 +53,6 @@ public class ProfileFragment extends Fragment {
     public void onCreate(Bundle hPrev) {
         super.onCreate(hPrev);
 
-
     }
 
     @Override
@@ -76,7 +75,6 @@ public class ProfileFragment extends Fragment {
             user.setEmail(getArguments().getString("email"));
             user.setPhone(getArguments().getString("phone"));
             user.setAddress(getArguments().getString("addr"));
-
         }
         txtProfileName.setText(user.getName());
         txtProfileAddr.setText(user.getAddress());

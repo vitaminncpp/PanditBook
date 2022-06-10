@@ -5,7 +5,10 @@ import androidx.annotation.NonNull;
 
 import com.aksahyaap.panditbook.model.Post;
 import com.aksahyaap.panditbook.model.PostRequest;
+import com.aksahyaap.panditbook.model.Search;
 import com.aksahyaap.panditbook.model.User;
+
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -29,11 +32,13 @@ public interface APIInterface {
     @POST("/post/edit")
     Call<Post> updatePost(@Body PostRequest request);
 
-    @POST("post/delete")
+    @POST("/post/delete")
     Call<String> deletePost(@Body PostRequest request);
 
     @POST("/getpost")
     Call<Post> getPost(@Body @NonNull PostRequest request);
 
+    @POST("/findallpandits")
+    Call<Map<String,Object>> getAllPandits(@Body @NonNull Search search);
 
 }

@@ -115,7 +115,8 @@ public class SignUpActivity extends AppCompatActivity {
                 this.txtBDate.getText().toString(),
                 this.txtPhone.getText().toString(),
                 this.txtAddress.getText().toString(),
-                this.txtPass.getText().toString()
+                this.txtPass.getText().toString(),
+                "About"
         );
 
         Call<User> call = apiInterface.register(user);

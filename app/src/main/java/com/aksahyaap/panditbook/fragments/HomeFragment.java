@@ -1,21 +1,36 @@
 package com.aksahyaap.panditbook.fragments;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aksahyaap.panditbook.R;
-import com.aksahyaap.panditbook.users.Pandit;
-import com.aksahyaap.panditbook.users.PanditAdapter;
+import com.aksahyaap.panditbook.activities.MainActivity;
+import com.aksahyaap.panditbook.activities.NavigationActivity;
+import com.aksahyaap.panditbook.adapters.PanditAdapter;
+import com.aksahyaap.panditbook.model.Search;
+import com.aksahyaap.panditbook.model.User;
+import com.aksahyaap.panditbook.network.APIInterface;
+import com.aksahyaap.panditbook.network.RetrofitClient;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,10 +43,12 @@ public class HomeFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
 
 
-    RecyclerView recyclerView_showPandits;
-    List<Pandit> panditList;
-    PanditAdapter panditAdapter;
-
+    RecyclerView recyclerHomePandits;
+    Button btnHomeLoad;
+    Search search;
+    List<User> panditList;
+    PanditAdapter adapter;
+    APIInterface api= RetrofitClient.getInstance();
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -53,33 +70,56 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        api= RetrofitClient.getInstance();
+        search=new Search();
+        search.setPageno(0);
+        search.setPageSize(2);
     }
+
+
 
     @SuppressLint("NotifyDataSetChanged")
     private void init() {
-        panditList = new ArrayList<>();
-        panditAdapter = new PanditAdapter(requireContext());
-        recyclerView_showPandits.setAdapter(panditAdapter);
-        panditList.add(new Pandit("Ram ji", 2, "I'm a good pandit", "Mumbai,Maharastra"));
-        panditList.add(new Pandit("Lakhan da", 5, "I'm a good pandit too", "Bhopal,MP"));
-        panditList.add(new Pandit("Angrezi Pandit", 2, "high rated pandit for shadi and sagai", "Ahmedabar,Gujarat"));
-        panditList.add(new Pandit("Ji Ji Maharaj", 4, "Humko bas nyochhavar se matlab hai. Jidhar jaada paisa udhar hum", "Mumbai,Maharastra"));
-        panditList.add(new Pandit("Engineer Pandit", 1, "Btech Pandit", "Delhi,Delhi"));
+        panditList = new ArrayList<User>();
+        adapter = new PanditAdapter(requireContext());
+        recyclerHomePandits.setAdapter(adapter);
 
-        panditAdapter.setPanditList(panditList);
-        panditAdapter.notifyDataSetChanged();
+        Call<Map<String, Object>> call = api.getAllPandits(search);
+        call.enqueue(new Callback<User>() {
+
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                //dialog.dismiss();
+
+                Log.i("RegistrationResponse", response.body().toString());
+                user = response.body();
+                Log.d("LoginTrack", "Login Succeeds:" + response.body().toString());
+                Toast.makeText(MainActivity.this, response.body().toString(), Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(MainActivity.this, NavigationActivity.class);
+                i.putExtra("user", user);
+                startActivity(i);
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                //dialog.dismiss();
+                Log.d("LoginTrack", "Server is not reachable:" + t);
+            }
+        });
+
+        adapter.setUserList(panditList);
+        adapter.notifyDataSetChanged();
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
-
-        recyclerView_showPandits = view.findViewById(R.id.recyclerView_showPandits);
-        recyclerView_showPandits.setLayoutManager(new LinearLayoutManager(requireContext()));
-
-        recyclerView_showPandits.setHasFixedSize(true);
+        recyclerHomePandits = view.findViewById(R.id.recyclerHomePandits);
+        recyclerHomePandits.setLayoutManager(new LinearLayoutManager(requireContext()));
+        btnHomeLoad=view.findViewById(R.id.btnHomeLoad);
+        recyclerHomePandits.setHasFixedSize(true);
         init();
 
         return view;

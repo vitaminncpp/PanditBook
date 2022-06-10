@@ -12,7 +12,7 @@ public class RetrofitClient {
     private static Retrofit retrofit;
 
     static {
-        baseurl = "http://192.168.212.227:8080";//Resources.getSystem().getString(R.string.server_url);
+        baseurl = "http://192.168.25.227:8080";//Resources.getSystem().getString(R.string.server_url);
         Log.i("server_url", baseurl);
         retrofit = new Retrofit.Builder().baseUrl(baseurl).addConverterFactory(GsonConverterFactory.create()).build();
         api = retrofit.create(APIInterface.class);

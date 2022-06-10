@@ -21,8 +21,10 @@ public class User implements Serializable {
     private String address;
     @SerializedName("pHash")
     private String pHash;
+    @SerializedName("description")
+    private String description;
 
-    public User(String name, String email, int uType, String bDate, String phone, String address, String pHash) {
+    public User(String name, String email, int uType, String bDate, String phone, String address, String pHash,String description) {
         this.name = name;
         this.email = email;
         this.uType = uType;
@@ -30,6 +32,7 @@ public class User implements Serializable {
         this.phone = phone;
         this.address = address;
         this.pHash = pHash;
+        this.description=description;
     }
 
     public User() {
@@ -89,6 +92,14 @@ public class User implements Serializable {
 
     public void setpHash(String pHash) {
         this.pHash = pHash;
+    }
+
+    public  String getDescription(){
+        return description;
+    }
+
+    public void setDescription(String description){
+        this.description=description;
     }
 
     @Override
